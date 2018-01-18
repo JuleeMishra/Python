@@ -30,7 +30,8 @@ def insert_call():
     listBox.delete(0,END)
     listBox.insert(END,(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()))#enter the values at the end of the list
 def update_call():
-    backend.update(selected_tuple[0],selected_tuple[1],selected_tuple[2],selected_tuple[3],selected_tuple[4])
+    backend.update(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
+    print(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
 
 def delete_call():
     backend.delete(selected_tuple[0])
@@ -78,7 +79,7 @@ b4=Button(window, text="Update", width=12, command=update_call)
 b4.grid(row=5, column=3)
 b5=Button(window, text="Delete", width=12, command=delete_call)
 b5.grid(row=6, column=3)
-b6=Button(window, text="Close", width=12)
+b6=Button(window, text="Close", width=12, command=window.destroy) # close window
 b6.grid(row=7, column=3)
 
 window.mainloop()
