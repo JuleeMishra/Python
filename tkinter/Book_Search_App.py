@@ -1,5 +1,5 @@
 """
-when you run frontend.py code it executes the backend code also because backend is imported in this code.
+when you run Book_Search_App.py code it executes the backend code also because backend is imported in this code.
 """
 from tkinter import*
 import backend
