@@ -36,6 +36,7 @@ def update_call():
 def delete_call():
     backend.delete(selected_tuple[0])
 
+window.wm_title("BookStore")
 l1 = Label(window,text="Title")
 l1.grid(row=0, column=0)
 l2 = Label(window,text="Year")
