@@ -8,7 +8,7 @@ window = Tk()
 def get_selected_row(event):  # View all functionality (Fill selected information from listbox in entry box)
     try: # If there is an IndexError none of the lines under try  will be executed. Instead the line under except  will be executed which is pass .
         global selected_tuple
-        index=listBox.curselection()[0] #To query the selection, use curselection method. It produces tuple of index
+        index=listBox.curselection()[0] #To query the selection, use curselection method. It produces tuple of index The pass  stetement means do nothing. So the function will do nothing when there's an empty listbox.
         selected_tuple= listBox.get(index)
         e1.delete(0,END)
         e1.insert(END,selected_tuple[1])
