@@ -6,17 +6,20 @@ import backend
 window = Tk()
 
 def get_selected_row(event):  # View all functionality (Fill selected information from listbox in entry box)
-    global selected_tuple
-    index=listBox.curselection()[0] #To query the selection, use curselection method. It produces tuple of index
-    selected_tuple= listBox.get(index)
-    e1.delete(0,END)
-    e1.insert(END,selected_tuple[1])
-    e2.delete(0,END)
-    e2.insert(END,selected_tuple[2])
-    e3.delete(0,END)
-    e3.insert(END,selected_tuple[3])
-    e4.delete(0,END)
-    e4.insert(END,selected_tuple[4])
+    try: # If there is an IndexError none of the lines under try  will be executed. Instead the line under except  will be executed which is pass .
+        global selected_tuple
+        index=listBox.curselection()[0] #To query the selection, use curselection method. It produces tuple of index
+        selected_tuple= listBox.get(index)
+        e1.delete(0,END)
+        e1.insert(END,selected_tuple[1])
+        e2.delete(0,END)
+        e2.insert(END,selected_tuple[2])
+        e3.delete(0,END)
+        e3.insert(END,selected_tuple[3])
+        e4.delete(0,END)
+        e4.insert(END,selected_tuple[4])
+    except IndexError:
+        pass
 def listbtn_call():
     listBox.delete(0,END) #every time you press the view all button it clears the Listbox first and then show the data available backend view()
     for row in backend.view(): # backend.view() returns list
