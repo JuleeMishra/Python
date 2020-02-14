@@ -2,7 +2,11 @@
 when you run Book_Search_App.py code it executes the backend code also because backend is imported in this code.
 """
 from tkinter import*
-import backend
+#import backend
+from backend import Database
+
+database = Database("books.db") #create object of class Database to access their methods
+# Note: to access all entity of class Database, we use database object instead of backend as we did in past.
 window = Tk()
 
 def get_selected_row(event):  # View all functionality (Fill selected information from listbox in entry box)
@@ -20,24 +24,24 @@ def get_selected_row(event):  # View all functionality (Fill selected informatio
         e4.insert(END,selected_tuple[4])
     except IndexError:
         pass
-def listbtn_call():
+def view_command():
     listBox.delete(0,END) #every time you press the view all button it clears the Listbox first and then show the data available backend view()
-    for row in backend.view(): # backend.view() returns list
+    for row in database.view(): # .view() is instance of Database class returns list
         listBox.insert(END,row) #END insert each next fetched row at end
 def search_call():
     listBox.delete(0,END)
-    for row in backend.search(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()): # if user type a name get() convert entry to string.
+    for row in database.search(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()): # if user type a name get() convert entry to string.
         listBox.insert(END,row)
 def insert_call():
-    backend.insert(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
+    database.insert(title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
     listBox.delete(0,END)
     listBox.insert(END,(title_text.get(),author_text.get(),year_text.get(),isbn_text.get()))#enter the values at the end of the list
 def update_call():
-    backend.update(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
+    database.update(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
     print(selected_tuple[0],title_text.get(),author_text.get(),year_text.get(),isbn_text.get())
 
 def delete_call():
-    backend.delete(selected_tuple[0])
+    database.delete(selected_tuple[0])
 
 window.wm_title("BookStore")
 l1 = Label(window,text="Title")
@@ -73,7 +77,7 @@ listBox.bind('<<ListboxSelect>>', get_selected_row) #bind use to bind a function
 listBox.configure(yscrollcommand=sb1.set) #yscrollcommand allow the user to scroll the listbox vertically,
 sb1.configure(command=listBox.yview) #yview is to make the listbox vertically scrollable
 
-b1=Button(window, text="View all", width=12, command=listbtn_call)
+b1=Button(window, text="View all", width=12, command=view_command)
 b1.grid(row=2, column=3)
 b2=Button(window, text="Search History", width=12, command=search_call)
 b2.grid(row=3, column=3)
